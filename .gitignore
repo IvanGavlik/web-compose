@@ -1,0 +1,35 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Clojure / deps.edn
+.cpcache/
+.clj-kondo/.cache/
+.lsp/
+target/
+pom.xml
+pom.xml.asc
+
+# nREPL
+.nrepl-port
+.nrepl-history
+
+# Java
+*.class
+*.jar
+*.war
+hs_err_pid*
+
+# Credentials — never commit real service config
+config/services.edn
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
