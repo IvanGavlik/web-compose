@@ -1,0 +1,11 @@
+.git
+.gitignore
+.idea
+*.iml
+.cpcache
+target
+*.log
+config/services.edn
+dev/
+README.md
+web-compose.iml

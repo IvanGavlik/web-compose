@@ -4,9 +4,14 @@
             [web-compose.config :as cfg]
             [web-compose.handler :as handler]))
 
+(def services-config-path
+  (or (System/getenv "SERVICES_CONFIG_PATH")
+      "config/services.edn"))
+
 (def config
-  {::services {:path "config/services.edn"}
-   ::server   {:port 3000 :services (ig/ref ::services)}})
+  {::services {:path services-config-path}
+   ::server   {:port     (or (some-> (System/getenv "PORT") Integer/parseInt) 3000)
+               :services (ig/ref ::services)}})
 
 (defmethod ig/init-key ::services [_ {:keys [path]}]
   (cfg/load-services path))

@@ -43,3 +43,8 @@ Once connected, run in the REPL:
 | `:run`   | Run the app as a standalone process      |
 | `:nrepl` | Start an nREPL server on port 7888       |
 | `:dev`   | Add dev-time deps (ring-devel + nrepl)   |
+
+## TODO
+
+* docker file for reander
+* how to pass env from reander - docker - app 
