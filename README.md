@@ -3,7 +3,7 @@
 
 ## Prerequisites
 
-A
+
 ## Running the app directly
 
 ```bash
@@ -46,5 +46,5 @@ Once connected, run in the REPL:
 
 ## TODO
 
-* docker file for reander
-* how to pass env from reander - docker - app 
+* email send message to both : uspjenso ste poslali upit, and one on the targe (already implemented)
+* expose api
