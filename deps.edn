@@ -9,14 +9,26 @@
   compojure/compojure         {:mvn/version "1.7.1"}
   com.draines/postal          {:mvn/version "2.0.5"}
   ring-cors/ring-cors         {:mvn/version "0.1.13"}
+  clj-http/clj-http           {:mvn/version "3.13.0"}
+  cheshire/cheshire           {:mvn/version "5.13.0"}
+  hickory/hickory             {:mvn/version "0.7.1"}
+  etaoin/etaoin               {:mvn/version "1.1.42"}
   org.clojure/tools.logging   {:mvn/version "1.3.0"}
-  org.slf4j/slf4j-simple      {:mvn/version "2.0.13"}}
+  org.slf4j/slf4j-simple      {:mvn/version "2.0.13"}
+  nrepl/nrepl                 {:mvn/version "1.3.1"}
+  jarohen/chime               {:mvn/version "0.3.3"}
+  clojure.java-time/clojure.java-time {:mvn/version "1.4.3"}}
 
  :aliases
- {:run  {:main-opts ["-m" "web-compose.core"]}
-  :dev  {:extra-paths ["dev"]
-         :extra-deps {ring/ring-devel  {:mvn/version "1.12.2"}
-                      nrepl/nrepl      {:mvn/version "1.3.1"}}}
-  :nrepl {:extra-paths ["dev"]
-          :extra-deps {nrepl/nrepl {:mvn/version "1.3.1"}}
-          :main-opts  ["-m" "nrepl.cmdline" "--port" "7888"]}}}
+ {; Start web server only (port 3000). No Chrome, no scraper. clj -M:run
+  :run          {:main-opts ["-m" "web-compose.core"]}
+
+  ; Interactive REPL for local development. Includes ring-devel for hot reload. clj -M:dev
+  :dev          {:extra-paths ["dev"]
+                 :extra-deps {ring/ring-devel {:mvn/version "1.12.2"}}}
+
+  ; Start a headless nREPL server on port 7888. Connect your editor to localhost:7888. clj -M:nrepl
+  :nrepl        {:main-opts ["-m" "nrepl.cmdline" "--port" "7888"]}
+
+  ; Start everything: web server + headless Chrome + scraper scheduler + nREPL. Used by Docker. clj -M:scraper-repl
+  :scraper-repl {:main-opts ["-m" "web-compose.scrape-obrrtni-registar.docker-repl"]}}}

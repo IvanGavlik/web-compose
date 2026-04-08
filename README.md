@@ -1,14 +1,12 @@
 # web-compose
 
-
 ## Prerequisites
-
 
 ## Running the app directly
 
-```bash
-clj -M:run
-```
+* Web server only (port 3000) `clj -M:run`
+* Web server + Chrome + nREPL + scraper `clj -M:scraper-repl` 
+  * Chrome need + driver 
 
 Visit [http://localhost:3000](http://localhost:3000). Stop with `Ctrl+C`.
 
@@ -16,15 +14,13 @@ Visit [http://localhost:3000](http://localhost:3000). Stop with `Ctrl+C`.
 
 ## REPL-driven development
 
-### 1. Start the nREPL server
+### Start a standalone nREPL (without the app)
 
-```bash
-clj -M:nrepl
-```
+`clj -M:nrepl`
+This starts nREPL on port 7888 but doesn't start the web server or scraper. Useful if you want a bare REPL to
+experiment.
 
-This starts an nREPL server on port **7888** with the `dev` namespace on the classpath. 
-
-### 2. Start the app from the REPL
+### Start the app from the REPL
 
 Once connected, run in the REPL:
 
@@ -36,6 +32,8 @@ Once connected, run in the REPL:
 (dev/restart)  ; restart after code changes
 ```
 
+### 
+
 ## Aliases
 
 | Alias    | Purpose                                  |
@@ -43,6 +41,31 @@ Once connected, run in the REPL:
 | `:run`   | Run the app as a standalone process      |
 | `:nrepl` | Start an nREPL server on port 7888       |
 | `:dev`   | Add dev-time deps (ring-devel + nrepl)   |
+
+
+## Run with docker 
+
+Build:
+`docker build -t web-compose .`
+
+Run:
+`docker compose up`
+
+or without compose:
+`docker run -p 3000:3000 -p 7888:7888 --shm-size=2g -v ./config:/app/config -v ./output:/app/output -e SCRAPE_HOUR=2 -e OUTPUT_FILE=/app/output/results.jsonl web-compose`
+
+Verify:
+* Web server `curl http://localhost:3000/`
+* scrapper 
+
+## Which repl to use
+User Remote Repl
+
+type nRepl context module web compose conect to server host localhost port 7888
+
+## How to reload changes use 
+
+`docker compose restart`
 
 ## TODO
 
