@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: web-compose
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: standard
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: SCRAPE_HOUR
+        value: 2
+      - key: OUTPUT_FILE
+        value: /app/output/results.jsonl
+      - key: SERVICES_CONFIG_PATH
+        value: /etc/secrets/services.edn

@@ -1,0 +1,15 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+      - "7888:7888"
+    volumes:
+      - ./src:/app/src
+      - ./output:/app/output
+      - ./config:/app/config
+    shm_size: '2gb'
+    environment:
+      - SCRAPE_HOUR=2
+      - OUTPUT_FILE=/app/output/results.jsonl
+      - DISPLAY=:99
