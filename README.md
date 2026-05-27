@@ -1,5 +1,8 @@
 # web-compose
 
+## TODO 
+* remove scrape obrtni registart + docker file make it as original 
+
 ## Prerequisites
 
 ## Running the app directly

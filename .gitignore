@@ -31,5 +31,5 @@ config/services.edn
 Thumbs.db
 desktop.ini
 
-# Logs
-*.log
+# test postmortem
+/test/postmortem/
