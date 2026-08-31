@@ -1,8 +1,5 @@
 # web-compose
 
-## TODO 
-* remove scrape obrtni registart + docker file make it as original 
-
 ## Prerequisites
 
 ## Running the app directly
@@ -69,6 +66,25 @@ type nRepl context module web compose conect to server host localhost port 7888
 ## How to reload changes use 
 
 `docker compose restart`
+
+## Registry scraper (obrtni registar)
+
+The `web-compose.scrape-obrrtni-registar` scraper (headless Chrome + daily
+scrape job against pretrazivac-obrta.gov.hr) is **off by default**, including
+in Docker. It is a local/dev-only tool and **must not be enabled in
+production** (Render) — it launches a full Chrome instance and runs an
+unattended scraper against a third-party government site.
+
+To turn it on locally, uncomment in `docker-compose.yml`:
+
+```yaml
+environment:
+  - ENABLE_SCRAPER=true
+  - SCRAPE_HOUR=2   # UTC hour for the daily scrape
+```
+
+then `docker compose up --build`. Leave it commented out (or unset) anywhere
+else, including `render.yaml`.
 
 ## TODO
 

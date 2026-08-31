@@ -19,13 +19,19 @@
    ::server   {:port     (or (some-> (System/getenv "PORT") Integer/parseInt) 3000)
                :services (ig/ref ::services)}})
 
+(def scraper-enabled?
+  (= "true" (System/getenv "ENABLE_SCRAPER")))
+
+;; Registry scraper (headless Chrome + daily scrape job) is OFF by default.
+;; Set ENABLE_SCRAPER=true to include it — local/dev only, never in production.
 (def docker-config
-  {::services {:path services-config-path}
-   ::server   {:port     (or (some-> (System/getenv "PORT") Integer/parseInt) 3000)
-               :services (ig/ref ::services)}
-   ::browser  {}
-   ::nrepl    {:port 7888}
-   ::scraper  {:hour (or (some-> (System/getenv "SCRAPE_HOUR") Integer/parseInt) 2)}})
+  (cond-> {::services {:path services-config-path}
+           ::server   {:port     (or (some-> (System/getenv "PORT") Integer/parseInt) 3000)
+                       :services (ig/ref ::services)}
+           ::nrepl    {:port 7888}}
+    scraper-enabled?
+    (assoc ::browser {}
+           ::scraper {:hour (or (some-> (System/getenv "SCRAPE_HOUR") Integer/parseInt) 2)})))
 
 (defmethod ig/init-key ::services [_ {:keys [path]}]
   (cfg/load-services path))

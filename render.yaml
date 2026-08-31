@@ -8,9 +8,8 @@ services:
     envVars:
       - key: PORT
         value: 3000
-      - key: SCRAPE_HOUR
-        value: 2
-      - key: OUTPUT_FILE
-        value: /app/output/results.jsonl
       - key: SERVICES_CONFIG_PATH
         value: /etc/secrets/services.edn
+      # Do NOT set ENABLE_SCRAPER here. The registry scraper (headless Chrome +
+      # daily scrape job) is a local/dev-only feature and must never run in
+      # production.
