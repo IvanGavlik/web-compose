@@ -11,8 +11,6 @@ COPY src/ src/
 RUN mkdir -p /app/output
 
 EXPOSE 3000
-EXPOSE 7888
-
 
 # Web server only — no Chrome, no scraper, no nREPL. See deps.edn :run alias
 # and web-compose.core/config (as opposed to docker-config).

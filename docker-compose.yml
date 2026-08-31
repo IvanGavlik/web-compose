@@ -3,7 +3,6 @@ services:
     build: .
     ports:
       - "3000:3000"
-      - "7888:7888"
     volumes:
       - ./src:/app/src
       - ./output:/app/output
